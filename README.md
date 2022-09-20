@@ -1,38 +1,17 @@
-# create-svelte
+# @ajwdmedia/svelterial-icons
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Svelte + Material Icons ❤️  
 
-## Creating a project
+Copies SVG components from @material-design-icons/svg and creates Svelte components  
+Also see sister project [ajwdmedia/svelterial-symbols](https://github.com/ajwdmedia/svelterial-symbols)
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Quirks
+Files should be named the same as on the [Material Icons site](https://fonts.google.com/icons?icon.set=Material+Icons), however PascalCased  
+Icon names that start with numbers have "Icon" preceeding them (`1k Plus => Icon1kPlus.svelte`)  
+Icons are also grouped by style (Outline, Filled, etc) - if you're using a lot of icons from the same group consider setting up a vite alias to them (eg `@ajwdmedia/svelterial-icons/Outlined/Person.svelte => %icons/Person.svelte`)  
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### License
+*(Copied from [marella/material-design-icons](https://github.com/marella/material-design-icons))*   
+Material design icons are created by [Google](https://github.com/google/material-design-icons#license)
+>We have made these icons available for you to incorporate into your products under the [Apache License Version 2.0](https://github.com/marella/material-design-icons/blob/main/svg/LICENSE). Feel free to remix and re-share these icons and documentation in your products. We'd love attribution in your app's about screen, but it's not required.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

@@ -21,18 +21,18 @@ const convertSVG = async (base, file) => {
     let svgString = await readFile(resolve(rootPath, base, file + ".svg"), { encoding: "utf8" });
 
     svgString = svgString.replace(`width="24"`, `width="{width}"`);
-    svgString = svgString.replace(`height="24"`, `height="{width}"`);
+    svgString = svgString.replace(`height="24"`, `height="{height}"`);
     svgString = svgString.replace(`<path d=`, `<path fill="{fill}" d=`);
 
     let component = `
-    <script lang=\"ts\">
-        export let size: string = "1rem";
-        export let width: string = size;
-        export let height: string = size;
-        export let fill: string = "white";
-    </script>
+<script lang="ts">
+    export let size: string = "1rem";
+    export let width: string = size;
+    export let height: string = size;
+    export let fill: string = "white";
+</script>
 
-    ${svgString}
+${svgString}
     `
 
     return { id: file, variant: convertNameToPascalCase(base), name: convertNameToPascalCase(file), component };
