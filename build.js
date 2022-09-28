@@ -22,7 +22,7 @@ const convertSVG = async (base, file) => {
 
     svgString = svgString.replace(`width="24"`, `width="{width}"`);
     svgString = svgString.replace(`height="24"`, `height="{height}"`);
-    svgString = svgString.replace(`<path d=`, `<path fill="{fill}" d=`);
+    svgString = svgString.replace(/<path d=/g, `<path fill="{fill}" d=`);
 
     let component = `
 <script lang="ts">
