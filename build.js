@@ -12,7 +12,7 @@ const targetPath = resolve("./src/lib");
  * @returns {string}
  */
 const convertNameToPascalCase = (name) => {
-    let hold = name.split("_").map(item => item[0].toUpperCase() + item.slice(1).toLowerCase()).join("");
+    let hold = name.split(/[_\- ]/g).map(item => item[0].toUpperCase() + item.slice(1).toLowerCase()).join("");
     if (hold[0].match(/\d/)) hold = "Icon" + hold;
     return hold;
 };
