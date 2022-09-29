@@ -23,7 +23,7 @@ jobs:
               name: Install Deps
             - run: npm run build
               name: Build
-            - run: npm publish ./package --access public
+            - run: npm publish ./package --access public -q
               name: Publish
               env:
                   NODE_AUTH_TOKEN: ${{secrets.npm_token}}
