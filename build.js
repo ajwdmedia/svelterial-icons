@@ -17,6 +17,12 @@ const convertNameToPascalCase = (name) => {
     return hold;
 };
 
+/**
+ * 
+ * @param {string} base 
+ * @param {string} file 
+ * @returns 
+ */
 const convertSVG = async (base, file) => {
     let svgString = await readFile(resolve(rootPath, base, file + ".svg"), { encoding: "utf8" });
 
@@ -25,6 +31,7 @@ const convertSVG = async (base, file) => {
     svgString = svgString.replace(/<path d=/g, `<path fill="{fill}" d=`);
 
     let component = `
+<!-- @deprecated Consider moving to ajwdmedia/svelterial-symbols when able. -->
 <script lang="ts">
     export let size: string = "1rem";
     export let width: string = size;
@@ -53,6 +60,9 @@ try {
 
 // Each folder is a style
 let folders = (await readdir(rootPath, { withFileTypes: true, encoding: "utf8" })).filter(item => item.isDirectory()).map(item => item.name);
+/**
+ * @type {Map<string, string[]>}
+ */
 let foldered = new Map();
 
 for (let folder of folders) {
@@ -73,7 +83,7 @@ for (let folder of folders) {
 
             await writeFile(resolve(targetPath, item.variant, item.name + ".svelte"), item.component, { encoding: "utf8" });
 
-            foldered.get(item.variant).push(item.name);
+            foldered.get(item.variant)?.push(item.name);
 
             promiseResolve(true);
         })
@@ -87,10 +97,10 @@ for (let folder of folders) {
 let finalExport = "";
 
 for (const [variant, names] of foldered) {
-    let exportFile = names.map(name => `export { default as ${name} } from "./${name}.svelte"`).join("\n");
+    let exportFile = names.map(name => `/** @deprecated Consider moving to ajwdmedia/svelterial-symbols when able. */\nexport { default as ${name} } from "./${name}.svelte"`).join("\n");
     await writeFile(resolve(targetPath, variant, "index.ts"), exportFile, { encoding: 'utf8' });
 
-    finalExport += `export * as ${variant} from "./${variant}/index"\n`;
+    finalExport += `/** @deprecated Consider moving to ajwdmedia/svelterial-symbols when able. */\nexport * as ${variant} from "./${variant}/index"\n`;
 }
 
 await writeFile(resolve(targetPath, "index.ts"), finalExport, { encoding: 'utf8' });
